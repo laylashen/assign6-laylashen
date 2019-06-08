@@ -32,3 +32,4 @@ class Robot extends Enemy {
     x += speed;
     if(x>width ||x<0)speed*=-1;
   }
+}
