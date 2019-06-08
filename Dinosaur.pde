@@ -37,3 +37,4 @@ class Dinosaur extends Enemy {
       currentSpeed*=-1;
     }
   }
+}
