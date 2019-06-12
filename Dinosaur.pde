@@ -6,12 +6,11 @@ class Dinosaur extends Enemy {
 	// Requirement #4: Complete Dinosaur Class
 
 	final float TRIGGERED_SPEED_MULTIPLIER = 5;
-  float speed=1;
-  float currentSpeed =speed;
+  float currentSpeed=2f/2;
 
   void display(){
-    image(dinosaur, x, y);
-        int direction = (speed > 0) ? RIGHT : LEFT;
+    //image(dinosaur, x, y);
+    int direction = (currentSpeed > 0) ? RIGHT : LEFT;
     
     pushMatrix();
     translate(x, y);
@@ -26,15 +25,30 @@ class Dinosaur extends Enemy {
   }
 
   void update(){
-    x += currentSpeed;
-    if(y==player.y) {
-      currentSpeed=TRIGGERED_SPEED_MULTIPLIER;
-    }else{
-      currentSpeed = speed;
-    }
+    x+=currentSpeed;
     
-    if(x>width ||x<0){
-      currentSpeed*=-1;
+    if (x < 0 || x > width - w) { 
+      currentSpeed *= -1 ;
+    } 
+    if(player.y == y && player.x > x && currentSpeed == 2f/2 ){
+      currentSpeed *= TRIGGERED_SPEED_MULTIPLIER;
     }
+    if(player.y == y && player.x < x && currentSpeed == -(2f/2)){
+      currentSpeed *= TRIGGERED_SPEED_MULTIPLIER;
+    }
+    if(player.y != y ){
+      currentSpeed = (currentSpeed > 0) ?  2f/2 :  -(2f/2);
+    }
+    //if(x >= width) x = -w;
+    //x += currentSpeed;
+    //if(y==player.y) {
+    //  currentSpeed=TRIGGERED_SPEED_MULTIPLIER;
+    //}else{
+    //  currentSpeed = speed;
+    //}
+    
+    //if(x>width ||x<0){
+    //  currentSpeed*=-1;
+    //}
   }
 }
